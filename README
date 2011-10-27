@@ -1,0 +1,11 @@
+NApf alpha :
+---------
+
+!! version alpha ne pas utiliser dans un environnement de prod
+
+TODO :
+----
+* créateur de bean
+* authentification
+* bugs à traqués
+* augmentation de la compatibilté window/linux
