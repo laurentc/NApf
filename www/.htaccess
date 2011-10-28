@@ -1,4 +1,5 @@
 RewriteEngine On
+# a modifier si le fichier n'est pas à la racine du site
 RewriteBase /sandbox/Napf/www/
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
