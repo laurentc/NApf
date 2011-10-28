@@ -28,6 +28,12 @@ abstract class AbstractDAO
      */
     protected $_conditions = array();
 
+    /**
+     * Créer un objet DAO
+     * 
+     * @param string $tablename
+     * @param array $connectionParams ('host','db','user','password')
+     */
     public function __construct($tablename, $connectionParams){
         $this->_host = $connectionParams['host'];
         $this->_db = $connectionParams['db'];
@@ -62,7 +68,7 @@ abstract class AbstractDAO
     protected function _introspection(){}
     protected function _connect(){}
     protected function _close(){}
-    public function doQuery(){}
+    public function doQuery($query, array $bind = null){}
     protected function _queryType($query){
         if(preg_match("/^update/", trim($query)) > 0){
             return self::QUERY_TYPE_UPDATE;
@@ -83,6 +89,9 @@ abstract class AbstractDAO
         if(!is_file(NAPF_CLASSES_PATH . "beans/" . $this->_table . "Bean.php")){
             $class = get_class($this);
             include NAPF_CLASSES_PATH . "napf/common/BeanModel.php";
+            if(!is_dir(NAPF_CLASSES_PATH . "beans/")){
+            	mkdir(NAPF_CLASSES_PATH . "beans/",0777,true);
+            }
             file_put_contents(NAPF_CLASSES_PATH . "beans/" . $this->_table . "Bean.php", $output);
         }
     }
