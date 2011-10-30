@@ -4,6 +4,8 @@ classes/beans/
 classes/auth/
 classes/servlets/
 configurations/
-
+.buildpath
+.project
+.settings
 
 
