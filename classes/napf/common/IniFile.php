@@ -47,4 +47,3 @@ class IniFile {
         eval($handler);
     }
 }
-class IniFileException extends \napf\core\NapfException{}

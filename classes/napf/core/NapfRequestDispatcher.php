@@ -68,7 +68,3 @@ class NapfRequestDispatcher
 		include $request->getContextPath() . $this->_path;
 	}
 }
-class NapfRequestDispatcherException extends NapfException
-{
-
-}
