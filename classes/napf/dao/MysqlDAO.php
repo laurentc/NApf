@@ -10,15 +10,41 @@ namespace napf\dao;
 
 class MysqlDAO extends AbstractDAO
 {
-    /** todo:passer la connection en statique ?
+    const QUERY_TYPE_SELECT = 0;
+    const QUERY_TYPE_INSERT = 1;
+    const QUERY_TYPE_UPDATE = 2;
+    const QUERY_TYPE_COUNT = 3;
+    const QUERY_TYPE_DELETE = 4;
+    protected $_fields;
+    protected $_primary;
+    protected $_table;
+    protected $_host;
+    protected $_user;
+    protected $_password;
+    protected $_db;
+    protected $_connexionParams;
+	/** todo:passer la connection en statique ?
      *
      * @var resource
      */
     protected $_connection = null;
+    
     /**
-     * @param  string $tablename
-     * @param  array $connectionString ('host','db','user','password')
+     * Créer un objet DAO
+     * 
+     * @param string $tablename
+     * @param array $connectionParams ('host','db','user','password')
      */
+    public function __construct($tablename, $connectionParams){
+        $this->_host = $connectionParams['host'];
+        $this->_db = $connectionParams['db'];
+        $this->_user = $connectionParams['user'];
+        $this->_password = $connectionParams['password'];
+        $this->_table= $tablename;
+        $this->_connexionParams = $connectionParams;
+        $this->_introspection();
+        $this->_makeBean();
+    }
     protected function _connect(){
         if($this->_connection === null){
             $this->_connection = mysql_connect($this->_host,$this->_user, $this->_password);
@@ -94,14 +120,14 @@ class MysqlDAO extends AbstractDAO
             throw new AbstractDAOException(mysql_error($this->_connection));
         }
         switch ($this->_queryType($query)){
-            case AbstractDAO::QUERY_TYPE_INSERT:
+            case self::QUERY_TYPE_INSERT:
                 $toReturn = mysql_insert_id($this->_connection);
                 break;
-            case AbstractDAO::QUERY_TYPE_UPDATE:
-            case AbstractDAO::QUERY_TYPE_DELETE:
+            case self::QUERY_TYPE_UPDATE:
+            case self::QUERY_TYPE_DELETE:
                 $toReturn = (isset($bind[":{$this->_primary}"]))?$bind[":{$this->_primary}"]:true;
                 break;
-            case AbstractDAO::QUERY_TYPE_COUNT:
+            case self::QUERY_TYPE_COUNT:
                 // TODO revoir le systeme de récupération du résultat des requêtes count
                 $row = mysql_fetch_array($result, MYSQL_ASSOC);
                     if(count($row) > 0){

@@ -10,40 +10,11 @@ namespace napf\dao;
 
 abstract class AbstractDAO
 {
-    const QUERY_TYPE_SELECT = 0;
-    const QUERY_TYPE_INSERT = 1;
-    const QUERY_TYPE_UPDATE = 2;
-    const QUERY_TYPE_COUNT = 3;
-    const QUERY_TYPE_DELETE = 4;
-    protected $_fields;
-    protected $_primary;
-    protected $_table;
-    protected $_host;
-    protected $_user;
-    protected $_password;
-    protected $_db;
-    protected $_connexionParams;
     /**
      * @var array(AbstractDAOCondition)
      */
     protected $_conditions = array();
 
-    /**
-     * Créer un objet DAO
-     * 
-     * @param string $tablename
-     * @param array $connectionParams ('host','db','user','password')
-     */
-    public function __construct($tablename, $connectionParams){
-        $this->_host = $connectionParams['host'];
-        $this->_db = $connectionParams['db'];
-        $this->_user = $connectionParams['user'];
-        $this->_password = $connectionParams['password'];
-        $this->_table= $tablename;
-        $this->_connexionParams = $connectionParams;
-        $this->_introspection();
-        $this->_makeBean();
-    }
     public abstract function get($id, $order = null);
     public abstract function getAll($order = null);
     public abstract function getWhere($order = null);
@@ -68,49 +39,7 @@ abstract class AbstractDAO
     protected function _introspection(){}
     protected function _connect(){}
     protected function _close(){}
-    public function doQuery($query, array $bind = null){}
-    protected function _queryType($query){
-        if(preg_match("/^update/", trim($query)) > 0){
-            return self::QUERY_TYPE_UPDATE;
-        }else if(preg_match("/^insert/", trim($query)) > 0){
-            return self::QUERY_TYPE_INSERT;
-        }else if(preg_match("/^select( )*count/", trim($query)) > 0){
-            return self::QUERY_TYPE_COUNT;
-        }else if(preg_match("/^delete/", trim($query)) > 0){
-            return self::QUERY_TYPE_DELETE;
-        }else {
-            return self::QUERY_TYPE_SELECT;
-        }
-    }
     public function getFields(){
         return $this->_fields;
-    }
-    protected function _makeBean(){
-        if(!is_file(NAPF_CLASSES_PATH . "beans/" . $this->_table . "Bean.php")){
-            $class = get_class($this);
-            include NAPF_CLASSES_PATH . "napf/common/BeanModel.php";
-            if(!is_dir(NAPF_CLASSES_PATH . "beans/")){
-            	mkdir(NAPF_CLASSES_PATH . "beans/",0777,true);
-            }
-            file_put_contents(NAPF_CLASSES_PATH . "beans/" . $this->_table . "Bean.php", $output);
-        }
-    }
-}
-class AbstractDAOException extends \napf\core\NapfException
-{
-    
-}
-class AbstractDAOCondition
-{
-    public $link;
-    public $field;
-    public $comparator;
-    public $value;
-    
-    public function __construct($field, $comparator, $value, $link){
-        $this->field = $field;
-        $this->comparator = $comparator;
-        $this->value = $value;
-        $this->link = $link;
     }
 }

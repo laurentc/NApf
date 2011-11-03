@@ -29,4 +29,3 @@ abstract class AbstractBean
         }
     }
 }
-class NapfBeanException extends NapfException{}
