@@ -7,5 +7,5 @@ configurations/
 .buildpath
 .project
 .settings
-
+.~lock.*
 
