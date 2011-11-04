@@ -37,8 +37,6 @@ abstract class AbstractDAO
         $this->_conditions = array();
     }
     protected function _introspection(){}
-    protected function _connect(){}
-    protected function _close(){}
     public function getFields(){
         return $this->_fields;
     }
