@@ -3,7 +3,7 @@ $methods = "";
 $properties = "";
 $primary = $this->_primary;
 $methods .= "\tpublic function __construct(\$id = null){\n";
-$methods .= "\t\t\$this->_dao = new \\$class(\"$this->_table\"," . var_export($this->_connexionParams,true) . ");\n";
+$methods .= "\t\t\$this->_dao = new \\$class(\"$this->_table\"," . var_export($this->_connection,true) . ");\n";
 $methods .= "\t\t\$this->preLoad();\n";
 $methods .= "\t\tif(\$id !== null){\n";
 $methods .= "\t\t\t\$values = \$this->_dao->get(\$id);\n";

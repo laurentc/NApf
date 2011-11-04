@@ -4,9 +4,9 @@ namespace napf\dao;
 abstract class AbstractBean
 {
     /**
-	* @var \napf\dao\AbstractDAO
+	* @var \napf\dao\SqlDAO
 	**/
-	private $_dao;
+    private $_dao;
     public function __construct($id = null){}
     public abstract function preSave();
     public abstract function postSave();
