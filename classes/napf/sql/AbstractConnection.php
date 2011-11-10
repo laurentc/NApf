@@ -15,29 +15,29 @@ abstract class AbstractConnection {
     protected $_password = null;
     protected $_connection = null;
     
-	/**
-	 * Création de la connection
-	 * @param string $connectionString 'host:port/base'
-	 * @param string $user
-	 * @param string $pass
-	 */
-	public function __construct($connectionString, $user, $password){
-		$this->_user = $user;
-		$this->_password = $password;
-		$this->_getConnectionParams($connectionString);
-	}
+    /**
+     * Création de la connection
+     * @param string $connectionString 'host:port/base'
+     * @param string $user
+     * @param string $pass
+     */
+    public function __construct($connectionString, $user, $password){
+	    $this->_user = $user;
+	    $this->_password = $password;
+	    $this->_getConnectionParams($connectionString);
+    }
     /**
      * Ouvre une connection à la base de données
      */
-	protected abstract function _connect();
-	/**
-	 * Récupère le type de requête
-	 * @param string $query
-	 */
+    protected abstract function _connect();
+    /**
+     * Récupère le type de requête
+     * @param string $query
+     */
     protected function _queryType($query){
     	// plusieurs requetes dans $query
     	if(strpos($query, ";") > -1){
-    		return self::QUERY_TYPE_MIXED;
+	    return self::QUERY_TYPE_MIXED;
     	}
         if(preg_match("/^update/", trim($query)) > 0){
             return self::QUERY_TYPE_UPDATE;
@@ -54,16 +54,27 @@ abstract class AbstractConnection {
     protected function _getConnectionParams($connectionString){
     	$tmp = explode("/", $connectionString);
     	if(count($tmp) > 1){
-    		$this->_db = $tmp[1];
+	    $this->_db = $tmp[1];
     	}
     	$tmp = explode(":", $tmp[0]);
     	if(count($tmp) > 1){
-    		$this->_port = $tmp[1];
+	    $this->_port = $tmp[1];
     	}
     	$this->_host = $tmp[0];
     }
     protected function _close(){
     	$this->close();
+    }
+    public function __sleep(){
+	return array('_host', '_port', '_db', '_user', '_password', '_connection');
+    }
+    public function makeBean(){
+	$name = ucfirst($this->_table);
+        if(!is_file(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php")){
+            $class = get_class($this);
+            include NAPF_CLASSES_PATH . "napf/common/BeanModel.php";
+            file_put_contents(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php", $output);
+        }
     }
 }
 

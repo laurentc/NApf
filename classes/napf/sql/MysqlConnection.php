@@ -107,5 +107,5 @@ class MysqlConnection extends AbstractConnection implements IConnection {
             mysql_close($this->_connection);
             $this->_connection = null;
         }
-	}
+	}	
 }

@@ -7,7 +7,8 @@ abstract class AbstractBean
 	* @var \napf\dao\SqlDAO
 	**/
     private $_dao;
-    public function __construct($id = null){}
+    
+    public function __construct(\napf\sql\IConnection $connection, $id = null){}
     public abstract function preSave();
     public abstract function postSave();
     public abstract function preLoad();

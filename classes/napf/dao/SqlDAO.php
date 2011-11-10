@@ -129,11 +129,4 @@ class SqlDAO extends AbstractDAO
         
         return $this->_connection->doQuery($query, $bind);
     }
-    protected function _makeBean(){
-        if(!is_file(NAPF_CLASSES_PATH . "beans/" . $this->_table . "Bean.php")){
-            $class = get_class($this);
-            include NAPF_CLASSES_PATH . "napf/common/BeanModel.php";
-            file_put_contents(NAPF_CLASSES_PATH . "beans/" . $this->_table . "Bean.php", $output);
-        }
-    }
 }
