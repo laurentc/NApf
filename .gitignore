@@ -8,5 +8,5 @@ configurations/
 .project
 .settings
 nbproject
-
 /nbproject/private/
+.~lock.*
