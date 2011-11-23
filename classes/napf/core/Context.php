@@ -25,7 +25,8 @@ class Context {
     }
     public function getConnection($name = 'default'){
 	if($this->_attributes['connection'][$name]){
-	    return $this->_attributes['connection'][$name];
+	    $parameters = $this->_attributes['connection'][$name];
+	    
 	}
 	return null;
     }
