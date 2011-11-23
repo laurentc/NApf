@@ -1,7 +1,7 @@
 <?php
 namespace napf\core;
 
-class NapfRequestDispatcherException extends NapfException
+class RequestDispatcherException extends Exception
 {
 
 }

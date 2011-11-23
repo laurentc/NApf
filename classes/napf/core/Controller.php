@@ -1,49 +1,56 @@
 <?php
 namespace napf\core;
 
-class NapfController
+class Controller
 {
-	private static $_instance = null;
+    private static $_instance = null;
     /**
-     * @var \napf\core\NapfServletRequest
+     * @var \napf\core\ServletRequest
      */
-    public $request;
+    public $request = null;
     /**
-     * @var NapfServletResponse
+     * @var \napf\core\ServletResponse
      */
-    public $response;
-    /**
-     * @var NapfHttpSession
+    public $response = null;
+    /*
+     * @var \napf\core\Mapper
      */
-    public $context;
+    public $mapper = null;
+    public $contextes = array();
+    
+    
 
-	/**
+    /**
      * @static
-     * @return \napf\core\NapfController
+     * @return \napf\core\Controller
      */
-	public static function getInstance(){
-		if(null === self::$_instance){
-			$c = __CLASS__;
-			self::$_instance = new $c;
-		}
-		return self::$_instance;
-	}
+    public static function getInstance(){
+	    if(null === self::$_instance){
+		    $c = __CLASS__;
+		    self::$_instance = new $c;
+	    }
+	    return self::$_instance;
+    }
 
-	public function __clone(){}
+    public function __clone(){}
 
     public function __construct(){
-        $this->response = new NapfServletResponse();
+        $this->response = new ServletResponse();
+	$this->mapper = Mapper::getInstance();	
     }
+    
     public function process(){
-        $mapper = NapfMapper::getInstance();
         $info = null;
         if(isset($_REQUEST["napfmap"])){
-        	$info = $mapper->getMapInfo($_REQUEST["napfmap"]);
+        	$info = $this->mapper->getMapInfo($_REQUEST["napfmap"]);
         }
         if($info !== null){
             $class = $info["classname"];
             $classAction = new $class;
-            $this->request = new NapfServletRequest($info["initparams"]);
+	    if(isset($info["initparams"]["context"])){
+		HttpSession::setContext($info["initparams"]["context"]);
+	    }
+            $this->request = new ServletRequest($info["initparams"]);
             $method = ucfirst($this->request->getMethod());
             $actionName = "do$method";
             $classAction->doBefore($this->request,$this->response);
@@ -51,7 +58,7 @@ class NapfController
             $classAction->doAfter($this->request,$this->response);
         } else {
             $classAction = new \napf\servlets\NotFoundAction();
-            $classAction->doGet(new NapfServletRequest(), $this->response);
+            $classAction->doGet(new ServletRequest(), $this->response);
         }
     }
 }

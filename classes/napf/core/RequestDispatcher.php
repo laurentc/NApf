@@ -1,7 +1,7 @@
 <?php
 namespace napf\core;
 
-class NapfRequestDispatcher
+class RequestDispatcher
 {
     private $_path;
     private $_layout = null;
@@ -18,12 +18,12 @@ class NapfRequestDispatcher
     		$this->_path = $path;
     	}
     }
-	public function forward(NapfServletRequest &$request,NapfServletResponse &$response){
+	public function forward(ServletRequest &$request,ServletResponse &$response){
 		$output = "";
         $tmp = explode(".", $this->_path);
         $file = NAPF_WWW_PATH . $this->_path;
         if(!is_file($file)){
-            throw new NapfRequestDispatcherException("Fichier `$file` introuvable");
+            throw new RequestDispatcherException("Fichier `$file` introuvable");
         }
         if($tmp[count($tmp)-1] == "tpl"){
             include NAPF_3PARTS_PATH . "smarty/Smarty.class.php";
@@ -47,7 +47,7 @@ class NapfRequestDispatcher
 		} else {
 			$layout = NAPF_WWW_PATH . $this->_layout;
 			if(!is_file($layout)){
-				throw new NapfRequestDispatcherException("Fichier `$layout` introuvable");
+				throw new RequestDispatcherException("Fichier `$layout` introuvable");
 			}
 			$CONTENT = $output;
 			include NAPF_WWW_PATH . $this->_layout;
@@ -64,7 +64,7 @@ class NapfRequestDispatcher
 			return null;
 		}
 	}*/
-	public function attach(NapfServletRequest &$request,NapfServletResponse &$response){
+	public function attach(ServletRequest &$request,ServletResponse &$response){
 		include $request->getContextPath() . $this->_path;
 	}
 }

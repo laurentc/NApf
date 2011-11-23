@@ -1,7 +1,7 @@
 RewriteEngine On
 # a modifier si le fichier n'est pas à la racine du site
 # ex : http://www.monsite.com/napf/www/index.php
-RewriteBase /napf/www/
+RewriteBase /napf/
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d

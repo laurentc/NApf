@@ -8,9 +8,9 @@
  */
  namespace napf\servlets;
 
- class NotFoundAction extends \napf\core\NapfServlet
+ class NotFoundAction extends \napf\core\Servlet
  {
-     public function doGet(\napf\core\NapfServletRequest &$request,\napf\core\NapfServletResponse &$response){
+     public function doGet(\napf\core\ServletRequest &$request,\napf\core\ServletResponse &$response){
          $request->getRequestDispatcher("404.php")->forward($request, $response);
      }
  }

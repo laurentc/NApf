@@ -1,14 +1,14 @@
 <?php
 namespace napf\core;
 
-class NapfMapper
+class Mapper
 {
     private static $_instance = null;
     private $_initParams = null;
 
      /**
      * @static
-     * @return \napf\core\NapfMapper
+     * @return \napf\core\Mapper
      */
     public static function getInstance(){
         if(null === self::$_instance){

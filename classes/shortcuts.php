@@ -70,3 +70,7 @@ function getIniFile($path){
 function url_echo($path, $params = array()){
     echo \napf\helpers\Url::get($path, $params);
 }
+function getProperty($name){
+    $prop = \napf\core\Properties::getInstance();
+    return $prop->$name;
+}

@@ -10,4 +10,4 @@ define('NAPF_3PARTS_PATH', NAPF_ROOT_PATH . 'thirdparts/');
 include 'classes/autoload.php';
 include 'classes/shortcuts.php';
 
-\napf\core\NapfController::getInstance()->process();
+\napf\core\Controller::getInstance()->process();

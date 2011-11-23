@@ -1,8 +1,8 @@
 <?php
 namespace napf\servlets;
 
-class ForwardAction extends \napf\core\NapfServlet{
-    public function doRequest(\napf\core\NapfServletRequest &$request, \napf\core\NapfServletResponse &$response, $forward){
+class ForwardAction extends \napf\core\Servlet{
+    public function doRequest(\napf\core\ServletRequest &$request, \napf\core\ServletResponse &$response, $forward){
         $request->getRequestDispatcher($forward)->forward($request, $response);
     }
 }

@@ -36,10 +36,10 @@ class LoginContext {
 class LoginContextFactory
 {
     public static function get($loginModule){
-        $loginContext = \napf\core\NapfHttpSession::getAttribute("LoginContext");
+        $loginContext = \napf\core\HttpSession::getAttribute("LoginContext");
         if($loginContext === null){
             $loginContext= new LoginContext($loginModule);
-            \napf\core\NapfHttpSession::setAttribute("LoginContext", $loginContext);
+            \napf\core\HttpSession::setAttribute("LoginContext", $loginContext);
         }
         return $loginContext;
     }

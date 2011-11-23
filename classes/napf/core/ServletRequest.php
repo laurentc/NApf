@@ -1,7 +1,7 @@
 <?php
 namespace napf\core;
 
-class NapfServletRequest
+class ServletRequest
 {
 	/**
 	 * String identifier for Basic authentication.
@@ -122,10 +122,10 @@ class NapfServletRequest
 	 * Returns a RequestDispatcher object that acts as a wrapper for the resource located at the given path.
 	 * 
 	 * @param String $path
-	 * @return NapfRequestDispatcher
+	 * @return RequestDispatcher
 	 */
 	public function getRequestDispatcher($path){
-        $requestDispatcher = new NapfRequestDispatcher($path);
+        $requestDispatcher = new RequestDispatcher($path);
         return $requestDispatcher;
     }
 	public function getRequestedSessionId(){

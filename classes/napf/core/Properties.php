@@ -23,7 +23,7 @@ class Properties {
 	}
 	public function load($file){
 		if(!is_file($file)){
-			throw new NapfException("Fichier " . $file . " introuvable");
+			throw new Exception("Fichier " . $file . " introuvable");
 		}
 		$content = parse_ini_file($file, true);
 		// on récupère les propriétés de l'environnement désiré
@@ -31,22 +31,20 @@ class Properties {
 		$object = $this->_convert($envprops);
 		$this->_properties->{pathinfo($file, PATHINFO_FILENAME)} = $object;
 	}
-	private function _convert($array){
+	/*private function _convert($array){
 	    $ar = array();
 	    if(is_array($array) && count($array) > 0){
 		    foreach ($array as $key=>$val){
 			$this->_parseDot($ar,$key, $val);
 		    }
 	    }
-	    var_dump($ar);
 	}
 	private function _parseDot(&$array, $string, $value){
 	    $part = str_replace('.', '\'][\'', $string);
 	    $eval = '$array[\''.$part.'\'] = \'$value\';';
-	    var_dump($eval);
 	    eval($eval);
-	}
-	/*private function _convert($array){
+	}*/
+	private function _convert($array){
 		$object = new \stdClass();
 		if(is_array($array) && count($array) > 0){
 			foreach ($array as $key=>$val){
@@ -58,11 +56,8 @@ class Properties {
 			}
 		}
 		return $object;
-	}*/
-	public function toArray(){
-	    return (array) $this->_properties;
 	}
-	/*private function _dotToObject(&$object, $string, $value=null){
+	private function _dotToObject(&$object, $string, $value=null){
 		$parts = explode('.', $string);
 		if(count($parts) > 0){
 			$obj = $object;
@@ -79,7 +74,7 @@ class Properties {
 		}else{
 			$object->$string = $value;
 		}
-	}*/
+	}
 	public function __clone(){}	
 	/**
 	 * singleton

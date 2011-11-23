@@ -1,7 +1,7 @@
 <?php
 namespace napf\core;
 
-class NapfServletResponse
+class ServletResponse
 {
 	const SC_ACCEPTED='202';
 	const SC_BAD_GATEWAY='502';

@@ -2,8 +2,8 @@
 namespace napf\core;
 session_start();
 
-class NapfHttpSession
-{
+class HttpSession
+{    
     /**
      * @param  string $name
      * @return mixed
@@ -28,5 +28,13 @@ class NapfHttpSession
     }
     public static  function removeAttribute($name){
         unset($_SESSION[$name]);
+    }
+    public static function setContext($contextname){
+	if(!isset($_SESSION['context']) || !in_array($contextname, $_SESSION['context'])){
+	    $_SESSION['context'][] = new Context($contextname, session_id());
+	}
+    }
+    public static function getContext(){
+	return (isset($_SESSION['context']))?$_SESSION['context']:'default';
     }
 }
