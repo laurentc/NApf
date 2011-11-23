@@ -29,12 +29,16 @@ class HttpSession
     public static  function removeAttribute($name){
         unset($_SESSION[$name]);
     }
-    public static function setContext($contextname){
+    public static function setContext($contextname = 'default'){
 	if(!isset($_SESSION['context']) || !in_array($contextname, $_SESSION['context'])){
-	    $_SESSION['context'][] = new Context($contextname, session_id());
+	    $_SESSION['context'][$contextname] = new Context($contextname, session_id());
 	}
     }
+    /**
+     * \napf\core\Context
+     * @return type 
+     */
     public static function getContext(){
-	return (isset($_SESSION['context']))?$_SESSION['context']:'default';
+	return (isset($_SESSION['context']))?$_SESSION['context']:null;
     }
 }

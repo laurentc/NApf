@@ -16,7 +16,6 @@ class Controller
      * @var \napf\core\Mapper
      */
     public $mapper = null;
-    public $contextes = array();
     
     
 
@@ -36,7 +35,7 @@ class Controller
 
     public function __construct(){
         $this->response = new ServletResponse();
-	$this->mapper = Mapper::getInstance();	
+	$this->mapper = Mapper::getInstance();
     }
     
     public function process(){
@@ -47,9 +46,8 @@ class Controller
         if($info !== null){
             $class = $info["classname"];
             $classAction = new $class;
-	    if(isset($info["initparams"]["context"])){
-		HttpSession::setContext($info["initparams"]["context"]);
-	    }
+	    $context = ($info["initparams"]["context"])?$info["initparams"]["context"]:'default';
+	    HttpSession::setContext($context);
             $this->request = new ServletRequest($info["initparams"]);
             $method = ucfirst($this->request->getMethod());
             $actionName = "do$method";
