@@ -1,7 +1,7 @@
 <?php
 namespace napf\sql;
 // TODO voir cas ou l'on aurait pas de base selectionnée
-class MysqlConnection extends AbstractConnection implements IConnection {
+class MysqlConnection extends AbstractConnection {
     const FIELD_TYPE_PRIMARY = 'PRI';
     const MYSQL_DEFAULT_PORT = '3306';
     const MYSQL_FIELD_FIELD = 'Field';
@@ -87,10 +87,8 @@ class MysqlConnection extends AbstractConnection implements IConnection {
 		    "default"=>$column[self::MYSQL_FIELD_DEFAULT],
 		    "extra"=>$column[self::MYSQL_FIELD_EXTRA]
 		);
-		if($fields !== null){
-		    $fields[$column[self::MYSQL_FIELD_FIELD]] = $toReturn[$column[self::MYSQL_FIELD_FIELD]];
-		}
-		if($primary !== null && $column[self::MYSQL_FIELD_KEY] === self::FIELD_TYPE_PRIMARY){
+		$fields[$column[self::MYSQL_FIELD_FIELD]] = $toReturn[$column[self::MYSQL_FIELD_FIELD]];
+		if($column[self::MYSQL_FIELD_KEY] === self::FIELD_TYPE_PRIMARY){
 		    $primary = $column[self::MYSQL_FIELD_FIELD];
 		}
 	    }

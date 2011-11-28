@@ -10,3 +10,7 @@ configurations/
 nbproject
 /nbproject/private/
 .~lock.*
+GPATH
+GRTAGS
+GSYMS
+GTAGS

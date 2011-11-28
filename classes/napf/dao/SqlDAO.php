@@ -15,11 +15,10 @@ class SqlDAO extends AbstractDAO
     const QUERY_TYPE_UPDATE = 2;
     const QUERY_TYPE_COUNT = 3;
     const QUERY_TYPE_DELETE = 4;
-    protected $_fields;
+    protected $_fields = array();
     protected $_primary;
     protected $_table;
-    /**
-     * 
+    /** 
      * Connection
      * @var \napf\sql\IConnection
      */
@@ -30,14 +29,14 @@ class SqlDAO extends AbstractDAO
      * @param string $tablename
      * @param array $connectionParams ('host','db','user','password')
      */
-    public function __construct($tablename, $connection){
+    public function __construct($tablename, \napf\sql\IConnection $connection){
         $this->_table= $tablename;
         $this->_connection = $connection;
         $this->_introspection();
-        $this->_makeBean();
+	$this->_makeBean();
     }
     protected function _introspection(){
-        $this->_connection->getFields($this->_table,$this->_fields, $this->_primary);
+        $this->_connection->getFields($this->_table, $this->_fields, $this->_primary);
     }
     public function getWhere($order = null)
     {
@@ -128,5 +127,13 @@ class SqlDAO extends AbstractDAO
         $bind = array(":{$this->_primary}"=>$id);
         
         return $this->_connection->doQuery($query, $bind);
+    }
+    private function _makeBean(){
+	$name = ucfirst($this->_table);
+	if(!is_file(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php")){
+	    $class = get_class($this);
+	    include NAPF_CLASSES_PATH . "napf/common/BeanModel.php";
+	    file_put_contents(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php", $output);
+	}
     }
 }

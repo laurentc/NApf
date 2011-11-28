@@ -1,7 +1,7 @@
 <?php
 namespace napf\sql;
 
-abstract class AbstractConnection {
+abstract class AbstractConnection implements IConnection {
     const QUERY_TYPE_SELECT = 0;
     const QUERY_TYPE_INSERT = 1;
     const QUERY_TYPE_UPDATE = 2;
@@ -67,14 +67,6 @@ abstract class AbstractConnection {
     }
     public function __sleep(){
 	return array('_host', '_port', '_db', '_user', '_password', '_connection');
-    }
-    public function makeBean(){
-	$name = ucfirst($this->_table);
-        if(!is_file(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php")){
-            $class = get_class($this);
-            include NAPF_CLASSES_PATH . "napf/common/BeanModel.php";
-            file_put_contents(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php", $output);
-        }
     }
 }
 
