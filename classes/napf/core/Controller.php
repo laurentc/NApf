@@ -16,11 +16,6 @@ class Controller
      * @var \napf\core\Mapper
      */
     public $mapper = null;
-    /**
-     *
-     * @var \napf\core\Context 
-     */
-    private $_context = null;
     
     
 
@@ -51,7 +46,8 @@ class Controller
         if($info !== null){
             $class = $info["classname"];
             $classAction = new $class;
-	    $this->setContext(($info["initparams"]["context"])?$info["initparams"]["context"]:'default');
+	    $contextName = ($info["initparams"]["context"])?$info["initparams"]["context"]:'default';
+	    HttpSession::setAttribute('ServletContext', ServletContext::factory($contextName));
             $this->request = new ServletRequest($info["initparams"]);
             $method = ucfirst($this->request->getMethod());
             $actionName = "do$method";
@@ -64,11 +60,4 @@ class Controller
         }
     }
     
-    private function setContext($contextName){
-	$this->_context = Context::factory($contextName, HttpSession::getSessionID());
-    }
-    
-    public function getContext(){
-	return $this->_context;
-    }
 }

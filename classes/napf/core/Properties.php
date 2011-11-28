@@ -3,14 +3,9 @@ namespace napf\core;
 
 class Properties {
 	private static $_instance;
-	/**
-	 *
-	 * @var \stdClass 
-	 */
-	private $_properties;
+	private $_properties = array();
 	
 	public function __construct(){
-		$this->_properties = new \stdClass();
 		$this->_init();
 	}
 	private function _init(){
@@ -29,22 +24,26 @@ class Properties {
 		// on récupère les propriétés de l'environnement désiré
 		$envprops = $content[NAPF_ENVIRONMENT];
 		$object = $this->_convert($envprops);
-		$this->_properties->{pathinfo($file, PATHINFO_FILENAME)} = $object;
+		$this->_properties[pathinfo($file, PATHINFO_FILENAME)] = $object;
 	}
-	/*private function _convert($array){
+	private function _convert($array){
 	    $ar = array();
 	    if(is_array($array) && count($array) > 0){
-		    foreach ($array as $key=>$val){
-			$this->_parseDot($ar,$key, $val);
-		    }
+		foreach ($array as $key=>$val){
+		    $this->_parseDot($ar,$key, $val);
+		}
 	    }
+	    return $ar;
 	}
 	private function _parseDot(&$array, $string, $value){
 	    $part = str_replace('.', '\'][\'', $string);
-	    $eval = '$array[\''.$part.'\'] = \'$value\';';
+	    $eval = '$array[\''.$part."'] = '$value';";
 	    eval($eval);
-	}*/
-	private function _convert($array){
+	}
+	public function __get($name){
+	    return (isset($this->_properties[$name]))?$this->_properties[$name]:null;
+	}
+	/*private function _convert($array){
 		$object = new \stdClass();
 		if(is_array($array) && count($array) > 0){
 			foreach ($array as $key=>$val){
@@ -75,6 +74,12 @@ class Properties {
 			$object->$string = $value;
 		}
 	}
+	public function __get($property){
+		if(isset($this->_properties->$property)){
+			return $this->_properties->$property;
+		}
+		return null;
+	}*/
 	public function __clone(){}	
 	/**
 	 * singleton
@@ -86,11 +91,5 @@ class Properties {
 			self::$_instance = new $c;
 		}
 		return self::$_instance;
-	}
-	public function __get($property){
-		if(isset($this->_properties->$property)){
-			return $this->_properties->$property;
-		}
-		return null;
 	}
 }
