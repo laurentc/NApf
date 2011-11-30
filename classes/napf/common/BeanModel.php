@@ -1,6 +1,6 @@
 <?php
 $methods = "";
-$properties = "";
+$properties = "\tprivate \$_dao;\n";
 $primary = $this->_primary;
 $methods .= "\tpublic function __construct(\$connection, \$id = null){\n";
 $methods .= "\t\t\$this->_dao = new \\$class(\"$this->_table\", \$connection);\n";

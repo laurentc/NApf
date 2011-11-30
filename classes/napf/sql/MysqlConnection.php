@@ -101,9 +101,16 @@ class MysqlConnection extends AbstractConnection {
         }
 	}
 	public function close(){
-        if($this->_connection !== null){
-            mysql_close($this->_connection);
-            $this->_connection = null;
+            if($this->_connection !== null){
+                mysql_close($this->_connection);
+                $this->_connection = null;
+            }
+	}
+        /**
+         *
+         * @return resource 
+         */
+        public function getConnection(){
+            return $this->_connection;
         }
-	}	
 }

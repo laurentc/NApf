@@ -10,11 +10,12 @@ class ConnectionFactory {
      */
     public static function get($driver, $parameters){
 	switch (strtolower($driver)){
-	    case 'mysql' :
-		return new MysqlConnection($parameters['connexionString'], $parameters['user'], $parameters['password']);
-		break;
-	    case 'pdomysql' :
-		return new MysqlPdoConnection($parameters['connexionString'], $parameters['user'], $parameters['password']);
+            case 'mysql' :
+                if(in_array("mysql", pdo_drivers())){
+                    return new MysqlPdoConnection($parameters['connexionString'], $parameters['user'], $parameters['password']);
+                }else{
+                    return new MysqlConnection($parameters['connexionString'], $parameters['user'], $parameters['password']);
+                }
 		break;
 	}
 	return null;

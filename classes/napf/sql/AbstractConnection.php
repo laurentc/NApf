@@ -66,8 +66,9 @@ abstract class AbstractConnection implements IConnection {
     	$this->close();
     }
     public function __sleep(){
-	return array('_host', '_port', '_db', '_user', '_password', '_connection');
+	return array('_host', '_port', '_db', '_user', '_password');
     }
+    public abstract function getConnection();
 }
 
 ?>

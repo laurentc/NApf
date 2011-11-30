@@ -33,7 +33,7 @@ class SqlDAO extends AbstractDAO
         $this->_table= $tablename;
         $this->_connection = $connection;
         $this->_introspection();
-	$this->_makeBean();
+	    $this->_makeBean();
     }
     protected function _introspection(){
         $this->_connection->getFields($this->_table, $this->_fields, $this->_primary);
