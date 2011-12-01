@@ -1,13 +1,1 @@
-NApf alpha :
----------
-
-  Why did i create NApf : to have a ligthweight php framework which works like jsp MVC model
-
-!! ALPHA version don't use in production environement
-
-TODO :
-----
-* bean maker
-* authentication
-* bugs correction
-* review linux/window compatibility
+Refonte du coeur en cours afin d'ajouter un contexte
