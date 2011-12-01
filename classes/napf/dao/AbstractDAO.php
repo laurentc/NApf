@@ -16,13 +16,25 @@ abstract class AbstractDAO
     protected $_conditions = array();
 
     public abstract function get($id, $order = null);
+
     public abstract function getAll($order = null);
+
     public abstract function getWhere($order = null);
+
     public abstract function insert(array $datas);
+
     public abstract function update($id, array $datas);
+
     public abstract function delete($id);
-    public function count(){}
-    public function countWhere(){}
+
+    public function count()
+    {
+    }
+
+    public function countWhere()
+    {
+    }
+
     /**
      * @param string $field
      * @param string $comparator
@@ -30,14 +42,22 @@ abstract class AbstractDAO
      * @param string $link
      * @return void
      */
-    public function addCondition($field, $comparator, $value, $link = "and"){
+    public function addCondition($field, $comparator, $value, $link = "and")
+    {
         $this->_conditions[] = new AbstractDAOCondition($field, $comparator, $value, $link = "and");
     }
-    public function resetCondition(){
+
+    public function resetCondition()
+    {
         $this->_conditions = array();
     }
-    protected function _introspection(){}
-    public function getFields(){
+
+    protected function _introspection()
+    {
+    }
+
+    public function getFields()
+    {
         return $this->_fields;
     }
 }

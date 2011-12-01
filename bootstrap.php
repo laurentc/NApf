@@ -1,5 +1,5 @@
-<?php 
-define('NAPF_ENVIRONMENT', 'development');// utilisé par les sections ini
+<?php
+define('NAPF_ENVIRONMENT', 'development'); // utilisé par les sections ini
 define('NAPF_ROOT_PATH', dirname(realpath(__FILE__)) . '/');
 define('NAPF_CLASSES_PATH', NAPF_ROOT_PATH . 'classes/');
 define('NAPF_CACHE_PATH', NAPF_ROOT_PATH . 'caches/');

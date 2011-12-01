@@ -16,23 +16,23 @@ $methods .= "\t\t\$this->postLoad();\n";
 $methods .= "\t}\n";
 $datas = "array(";
 $first = true;
-if(is_array($this->_fields)){
-    foreach($this->_fields as $key=>$val){
-	$properties .= "\tprivate \$_" . $key .";\n";
+if (is_array($this->_fields)) {
+    foreach ($this->_fields as $key => $val) {
+        $properties .= "\tprivate \$_" . $key . ";\n";
 
-	$methods .= "\tpublic function get" . ucfirst($key) . "(){\n";
-	$methods .= "\t\treturn \$this->_" . $key .";\n";
-	$methods .= "\t}\n";
-	$methods .= "\tpublic function set" . ucfirst($key) . "(\$val){\n";
-	$methods .= "\t\t\$this->_" . $key ." = \$val;\n";
-	$methods .= "\t}\n";
-	if($val["key"] !== "PRI"){
-	    if(!$first){
-		$datas .= ", ";
-	    }
-	    $datas .= '"' . $key . '"=>$this->_' . $key;
-	    $first = false;
-	}
+        $methods .= "\tpublic function get" . ucfirst($key) . "(){\n";
+        $methods .= "\t\treturn \$this->_" . $key . ";\n";
+        $methods .= "\t}\n";
+        $methods .= "\tpublic function set" . ucfirst($key) . "(\$val){\n";
+        $methods .= "\t\t\$this->_" . $key . " = \$val;\n";
+        $methods .= "\t}\n";
+        if ($val["key"] !== "PRI") {
+            if (!$first) {
+                $datas .= ", ";
+            }
+            $datas .= '"' . $key . '"=>$this->_' . $key;
+            $first = false;
+        }
     }
 }
 $datas .= ")";

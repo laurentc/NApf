@@ -13,6 +13,7 @@ header("Status: " . \napf\core\NapfServletResponse::SC_NOT_FOUND);
     <tr>
         <td>
             <h1>404</h1>
+
             <h3>Page Introuvable</h3>
         </td>
         <td><input type="image" src="napf.jpg"></td>

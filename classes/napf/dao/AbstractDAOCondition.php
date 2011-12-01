@@ -7,8 +7,9 @@ class AbstractDAOCondition
     public $field;
     public $comparator;
     public $value;
-    
-    public function __construct($field, $comparator, $value, $link){
+
+    public function __construct($field, $comparator, $value, $link)
+    {
         $this->field = $field;
         $this->comparator = $comparator;
         $this->value = $value;

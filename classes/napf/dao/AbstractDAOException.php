@@ -1,4 +1,6 @@
 <?php
 namespace napf\dao;
 
-class AbstractDAOException extends \Exception{}
+class AbstractDAOException extends \Exception
+{
+}

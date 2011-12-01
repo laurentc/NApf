@@ -1,7 +1,8 @@
 <?php
 namespace napf\auth;
 
-abstract class LoginModule {
+abstract class LoginModule
+{
     /**
      * @var \napf\auth\Subject
      */
@@ -23,18 +24,25 @@ abstract class LoginModule {
      * @return void
      */
     public abstract function login($login, $password);
+
     /**
      * @abstract
      * @return void
      */
     public abstract function logout();
-    public function getSubject(){
+
+    public function getSubject()
+    {
         return $this->_subject;
     }
-    public function __construct(){
+
+    public function __construct()
+    {
         $this->_subject = new \napf\auth\Subject();
     }
-    public function commit(){
+
+    public function commit()
+    {
         $this->_subject->setConnected(true);
     }
 }

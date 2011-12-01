@@ -6,11 +6,12 @@
  * Time: 16:37
  * To change this template use File | Settings | File Templates.
  */
- namespace napf\servlets;
+namespace napf\servlets;
 
- class NotFoundAction extends \napf\core\Servlet
- {
-     public function doGet(\napf\core\ServletRequest &$request,\napf\core\ServletResponse &$response){
-         $request->getRequestDispatcher("404.php")->forward($request, $response);
-     }
- }
+class NotFoundAction extends \napf\core\Servlet
+{
+    public function doGet(\napf\core\ServletRequest &$request, \napf\core\ServletResponse &$response)
+    {
+        $request->getRequestDispatcher("404.php")->forward($request, $response);
+    }
+}
