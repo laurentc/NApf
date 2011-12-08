@@ -6,8 +6,8 @@
  * Time: 16:37
  * To change this template use File | Settings | File Templates.
  */
-header("HTTP/1.0 " . \napf\core\NapfServletResponse::SC_NOT_FOUND);
-header("Status: " . \napf\core\NapfServletResponse::SC_NOT_FOUND);
+header("HTTP/1.0 " . \napf\core\ServletResponse::SC_NOT_FOUND);
+header("Status: " . \napf\core\ServletResponse::SC_NOT_FOUND);
 ?>
 <table>
     <tr>

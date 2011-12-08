@@ -3,6 +3,8 @@ namespace napf\core;
 
 class Controller
 {
+    const ENVIRONMENT_DEVELOPMENT = 0;
+    const ENVIRONMENT_PRODUCTION = 1;
     private static $_instance = null;
     /**
      * @var \napf\core\ServletRequest
@@ -47,16 +49,25 @@ class Controller
         if (isset($_REQUEST["napfmap"])) {
             $info = $this->mapper->getMapInfo($_REQUEST["napfmap"]);
         }
+        var_dump($info);
         if ($info !== null) {
-            $class = $info["classname"];
+            if($info['jsp-file'] !== null){
+                $class = "napf\servlets\ForwardAction";
+            } else {
+                $class = $info["classname"];
+            }
             $classAction = new $class;
             $contextName = ($info["initparams"]["context"]) ? $info["initparams"]["context"] : 'default';
             HttpSession::setAttribute('ServletContext', ServletContext::factory($contextName));
             $this->request = new ServletRequest($info["initparams"]);
-            $method = ucfirst($this->request->getMethod());
-            $actionName = "do$method";
             $classAction->doBefore($this->request, $this->response);
-            $classAction->$actionName($this->request, $this->response);
+            if($info['jsp-file'] !== null){
+                $classAction->doRequest($this->request, $this->response, $info['jsp']);
+            } else {
+                $method = ucfirst($this->request->getMethod());
+                $actionName = "do$method";
+                $classAction->$actionName($this->request, $this->response);
+            }
             $classAction->doAfter($this->request, $this->response);
         } else {
             $classAction = new \napf\servlets\NotFoundAction();

@@ -21,7 +21,7 @@ class Mapper
 
     public function getMapInfo($servletPath)
     {
-        if (!\napf\core\Cache::exist("mapping")) {
+        if (!\napf\core\Cache::exist("mapping") || NAPF_ENVIRONMENT === Controller::ENVIRONMENT_DEVELOPMENT) {
             \napf\core\Cache::set("mapping", $this->refreshCache());
         }
         $mapping = \napf\core\Cache::get("mapping");
@@ -42,17 +42,23 @@ class Mapper
                     $temp2 = $xml->xpath("/web-app/servlet-mapping[servlet-name='" . (string)$object . "']/url-pattern");
                     $temp3 = $xml->xpath("/web-app/servlet[servlet-name='" . (string)$object . "']/servlet-class");
                     $params = $xml->xpath("/web-app/servlet[servlet-name='" . (string)$object . "']/init-param");
+                    $temp4 = $xml->xpath("/web-app/servlet[servlet-name='" . (string)$object . "']/jsp-file");
                     $initParams = array();
                     foreach ($params as $param) {
                         $name = $param->xpath("param-name");
                         $value = $param->xpath("param-value");
                         $initParams[(string)$name[0]] = (string)$value[0];
                     }
+                    if(!isset($initParams['context'])){
+                        $initParams['context'] = 'default';
+                    }
 
                     $pattern = (count($temp2) > 0) ? $temp2[0] : null;
                     $className = (count($temp3) > 0) ? $temp3[0] : null;
+                    $jsp = (count($temp4) > 0) ? $temp4[0] : null;
                     $toReturn[(string)$pattern]["classname"] = (string)$className;
                     $toReturn[(string)$pattern]["initparams"] = $initParams;
+                    $toReturn[(string)$pattern]["jsp-file"] = (string)$jsp;
                 }
             }
         }
