@@ -1,1 +1,1 @@
-Refonte du coeur en cours afin d'ajouter un contexte
+Je refléchis à la meilleur facon de récupérer le contexte : dans le mapping (il faut le préciser pour chaque servlet), recupération du nom du fichier de mapping, ...?
