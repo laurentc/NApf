@@ -1,5 +1,6 @@
 <?php
 $methods = "";
+$init = "";
 $properties = "\tprivate \$_dao;\n";
 $primary = $this->_primary;
 $methods .= "\tpublic function __construct(\$connection, \$id = null){\n";
@@ -19,7 +20,7 @@ $first = true;
 if (is_array($this->_fields)) {
     foreach ($this->_fields as $key => $val) {
         $properties .= "\tprivate \$_" . $key . ";\n";
-
+        $init .= "\t\t\$this->_" . $key . " = null;\n";
         $methods .= "\tpublic function get" . ucfirst($key) . "(){\n";
         $methods .= "\t\treturn \$this->_" . $key . ";\n";
         $methods .= "\t}\n";
@@ -60,7 +61,7 @@ $methods .= "\t\t\$this->postSave();\n";
 $methods .= "\t}\n";
 $methods .= "\tpublic function delete(){\n";
 $methods .= "\t\t\$this->_dao->delete(\$this->_$primary);\n";
-$methods .= "\t\t\$this->_$primary = null;\n";
+$methods .= $init;
 $methods .= "\t}\n";
 
 
