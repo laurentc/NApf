@@ -369,12 +369,12 @@ Used in: filter, servlet
 <!ELEMENT init-param (param-name, param-value, description?)>
 
 <!--
-The jsp-file element contains the full path to a JSP file within
+The php-file element contains the full path to a JSP file within
 the web application beginning with a `/'.
 
 Used in: servlet
 -->
-<!ELEMENT jsp-file (#PCDATA)>
+<!ELEMENT php-file (#PCDATA)>
 
 <!--
 The large-icon element contains the name of a file
@@ -703,13 +703,13 @@ Used in: servlet
 
 <!--
 The servlet element contains the declarative data of a
-servlet. If a jsp-file is specified and the load-on-startup element is
+servlet. If a php-file is specified and the load-on-startup element is
 present, then the JSP should be precompiled and loaded.
 
 Used in: web-app
 -->
 <!ELEMENT servlet (icon?, servlet-name, display-name?, description?,
-(servlet-class|jsp-file), init-param*, load-on-startup?, run-as?, security-role-ref*)>
+(servlet-class|php-file), init-param*, load-on-startup?, run-as?, security-role-ref*)>
 
 <!--
 The servlet-class element contains the fully qualified class name
@@ -906,7 +906,7 @@ standard deployment descriptor.
 <!ATTLIST http-method id ID #IMPLIED>
 <!ATTLIST icon id ID #IMPLIED>
 <!ATTLIST init-param id ID #IMPLIED>
-<!ATTLIST jsp-file id ID #IMPLIED>
+<!ATTLIST php-file id ID #IMPLIED>
 <!ATTLIST large-icon id ID #IMPLIED>
 <!ATTLIST listener id ID #IMPLIED>
 <!ATTLIST listener-class id ID #IMPLIED>
