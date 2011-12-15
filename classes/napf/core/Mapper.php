@@ -50,15 +50,15 @@ class Mapper
                         $initParams[(string)$name[0]] = (string)$value[0];
                     }
                     if(!isset($initParams['context'])){
-                        $initParams['context'] = 'default';
+                        $initParams['context'] = (string)$temp[0];
                     }
 
                     $pattern = (count($temp2) > 0) ? $temp2[0] : null;
-                    $className = (count($temp3) > 0) ? $temp3[0] : null;
-                    $jsp = (count($temp4) > 0) ? $temp4[0] : null;
-                    $toReturn[(string)$pattern]["classname"] = (string)$className;
-                    $toReturn[(string)$pattern]["initparams"] = $initParams;
-                    $toReturn[(string)$pattern]["jsp-file"] = (string)$jsp;
+                    if($pattern !== null){
+                        $toReturn[(string)$pattern]["classname"] = (count($temp3) > 0) ? (string)$temp3[0] : null;
+                        $toReturn[(string)$pattern]["initparams"] = $initParams;
+                        $toReturn[(string)$pattern]["jsp-file"] = (count($temp4) > 0) ? (string)$temp4[0] : null;
+                    }
                 }
             }
         }

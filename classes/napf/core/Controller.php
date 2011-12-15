@@ -3,8 +3,8 @@ namespace napf\core;
 
 class Controller
 {
-    const ENVIRONMENT_DEVELOPMENT = 0;
-    const ENVIRONMENT_PRODUCTION = 1;
+    const ENVIRONMENT_DEVELOPMENT = 'development';
+    const ENVIRONMENT_PRODUCTION = 'production';
     private static $_instance = null;
     /**
      * @var \napf\core\ServletRequest
@@ -49,7 +49,6 @@ class Controller
         if (isset($_REQUEST["napfmap"])) {
             $info = $this->mapper->getMapInfo($_REQUEST["napfmap"]);
         }
-        var_dump($info);
         if ($info !== null) {
             if($info['jsp-file'] !== null){
                 $class = "napf\servlets\ForwardAction";
@@ -62,7 +61,7 @@ class Controller
             $this->request = new ServletRequest($info["initparams"]);
             $classAction->doBefore($this->request, $this->response);
             if($info['jsp-file'] !== null){
-                $classAction->doRequest($this->request, $this->response, $info['jsp']);
+                $classAction->doRequest($this->request, $this->response, $info['jsp-file']);
             } else {
                 $method = ucfirst($this->request->getMethod());
                 $actionName = "do$method";

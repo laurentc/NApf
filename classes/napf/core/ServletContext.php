@@ -19,7 +19,7 @@ class ServletContext
     public function __construct($name)
     {
         $this->_name = $name;
-        $property = new Properties();
+        $property = Properties::getInstance();
         $this->_attributes = $property->$name;
     }
 
