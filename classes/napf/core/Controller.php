@@ -50,7 +50,7 @@ class Controller
             $info = $this->mapper->getMapInfo($_REQUEST["napfmap"]);
         }
         if ($info !== null) {
-            if($info['jsp-file'] !== null){
+            if($info['php-file'] !== null){
                 $class = "napf\servlets\ForwardAction";
             } else {
                 $class = $info["classname"];
@@ -60,8 +60,8 @@ class Controller
             HttpSession::setAttribute('ServletContext', ServletContext::factory($contextName));
             $this->request = new ServletRequest($info["initparams"]);
             $classAction->doBefore($this->request, $this->response);
-            if($info['jsp-file'] !== null){
-                $classAction->doRequest($this->request, $this->response, $info['jsp-file']);
+            if($info['php-file'] !== null){
+                $classAction->doRequest($this->request, $this->response, $info['php-file']);
             } else {
                 $method = ucfirst($this->request->getMethod());
                 $actionName = "do$method";

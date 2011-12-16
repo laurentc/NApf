@@ -259,4 +259,12 @@ class ServletRequest
             $this->_servletPath = (isset($temp[0])) ? "/" . $temp[0] : null;
         }
     }
+    public function __get($name){
+        if(isset($this->_parameters[$name])){
+            return $this->_parameters[$name];
+        } else if(isset($this->_attributes[$name])){
+            return $this->_attributes[$name];
+        }
+        return null;
+    }
 }

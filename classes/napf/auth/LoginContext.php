@@ -7,13 +7,10 @@ class LoginContext
      * @var \napf\auth\LoginModule
      */
     private $_loginModule;
-    private $_classModule;
     private $_redirect = null;
 
-    public function __construct($loginModule)
-    {
-        $this->_classModule = "\\auth\\" . ucfirst($loginModule) . "LoginModule";
-        $this->_loginModule = new $this->_classModule;
+    public function __construct(LoginModule $loginModule){
+        $this->_loginModule = $loginModule;
     }
 
     public function getSubject()
@@ -48,7 +45,7 @@ class LoginContext
 
 class LoginContextFactory
 {
-    public static function get($loginModule)
+    public static function get(LoginModule $loginModule)
     {
         $loginContext = \napf\core\HttpSession::getAttribute("LoginContext");
         if ($loginContext === null) {

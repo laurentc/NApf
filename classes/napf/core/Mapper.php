@@ -42,7 +42,7 @@ class Mapper
                     $temp2 = $xml->xpath("/web-app/servlet-mapping[servlet-name='" . (string)$object . "']/url-pattern");
                     $temp3 = $xml->xpath("/web-app/servlet[servlet-name='" . (string)$object . "']/servlet-class");
                     $params = $xml->xpath("/web-app/servlet[servlet-name='" . (string)$object . "']/init-param");
-                    $temp4 = $xml->xpath("/web-app/servlet[servlet-name='" . (string)$object . "']/jsp-file");
+                    $temp4 = $xml->xpath("/web-app/servlet[servlet-name='" . (string)$object . "']/php-file");
                     $initParams = array();
                     foreach ($params as $param) {
                         $name = $param->xpath("param-name");
@@ -57,7 +57,7 @@ class Mapper
                     if($pattern !== null){
                         $toReturn[(string)$pattern]["classname"] = (count($temp3) > 0) ? (string)$temp3[0] : null;
                         $toReturn[(string)$pattern]["initparams"] = $initParams;
-                        $toReturn[(string)$pattern]["jsp-file"] = (count($temp4) > 0) ? (string)$temp4[0] : null;
+                        $toReturn[(string)$pattern]["php-file"] = (count($temp4) > 0) ? (string)$temp4[0] : null;
                     }
                 }
             }

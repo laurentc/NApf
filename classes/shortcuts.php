@@ -5,7 +5,7 @@
  */
 function getRequest()
 {
-    return \napf\core\NapfController::getInstance()->request;
+    return \napf\core\Controller::getInstance()->request;
 }
 
 /**
@@ -13,7 +13,7 @@ function getRequest()
  */
 function getResponse()
 {
-    return \napf\core\NapfController::getInstance()->response;
+    return \napf\core\Controller::getInstance()->response;
 }
 
 // AUTH
@@ -32,7 +32,7 @@ function getLoginContext($loginModule)
  */
 function getUser()
 {
-    $lc = \napf\core\NapfHttpSession::getAttribute("LoginContext");
+    $lc = \napf\core\HttpSession::getAttribute("LoginContext");
     if ($lc !== null && $lc->getSubject() !== null) {
         return $lc->getSubject();
     }
