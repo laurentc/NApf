@@ -3,6 +3,12 @@ namespace napf\helpers;
 
 class Url
 {
+    /**
+     * Génère une URL contextualisée
+     * @param string $pattern
+     * @param array $params
+     * @return string 
+     */
     public static function get($pattern, $params = array())
     {
         if (substr(trim($pattern), 0, 4) === "http") {
@@ -18,7 +24,6 @@ class Url
                 $toReturn .= $key . "=" . $val;
             }
         }
-        //$toReturn = preg_replace("#/(/)*#","/",$toReturn);
 
         return $toReturn;
     }

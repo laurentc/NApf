@@ -5,6 +5,8 @@ class RequestDispatcher
 {
     private $_path;
     private $_layout = null;
+    public $request;
+    public $response;
 
     /**
      * @param  string $path
@@ -22,6 +24,8 @@ class RequestDispatcher
 
     public function forward(ServletRequest &$request, ServletResponse &$response)
     {
+        $this->request = $request;
+        $this->response = $response;
         $output = "";
         $tmp = explode(".", $this->_path);
         $file = NAPF_WWW_PATH . $this->_path;

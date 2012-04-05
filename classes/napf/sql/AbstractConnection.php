@@ -9,6 +9,7 @@ abstract class AbstractConnection implements IConnection
     const QUERY_TYPE_COUNT = 3;
     const QUERY_TYPE_DELETE = 4;
     const QUERY_TYPE_MIXED = 5;
+    protected $_connectionString;
     protected $_host = null;
     protected $_port = null;
     protected $_db = null;
@@ -68,6 +69,10 @@ abstract class AbstractConnection implements IConnection
             $this->_port = $tmp[1];
         }
         $this->_host = $tmp[0];
+        if(empty($this->_db) || empty($this->_host)){
+            throw new ConnectionException("La chaîne de connexion incorrecte. 'host[:port]/db' attendu");
+        }
+        $this->_connectionString = $connectionString;
     }
 
     protected function _close()

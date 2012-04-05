@@ -1,4 +1,7 @@
 <?php
+/**
+ *  Driver MySQL 
+ */
 namespace napf\sql;
 // TODO voir cas ou l'on aurait pas de base selectionnée
 class MysqlConnection extends AbstractConnection
@@ -108,6 +111,9 @@ class MysqlConnection extends AbstractConnection
     {
         if ($this->_connection === null) {
             $this->_connection = mysql_connect($this->_host . ':' . $this->_port, $this->_user, $this->_password);
+            if(!$this->_connection){
+                throw new ConnectionException("Connexion impossible : " . mysql_error());
+            }
         }
     }
 

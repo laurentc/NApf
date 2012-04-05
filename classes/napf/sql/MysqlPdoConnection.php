@@ -1,4 +1,7 @@
 <?php
+/**
+ * Driver Pdo MySQL 
+ */
 namespace napf\sql;
 
 class MysqlPdoConnection extends MysqlConnection

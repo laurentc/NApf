@@ -4,7 +4,7 @@ namespace napf\sql;
 interface IConnection
 {
     /**
-     * Exectute une requête
+     * Execute une requête
      * @param string $query (select * from table where champ=:field)
      * @param array $bind (':field'=>$var)
      */
