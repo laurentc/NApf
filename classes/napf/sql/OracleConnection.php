@@ -27,7 +27,7 @@ class OracleConnection extends AbstractConnection{
         
     }
     public function getConnection() {
-        
+        return $this->_connection;
     }
     public function getFields($table, &$fields, &$primary) {
         
