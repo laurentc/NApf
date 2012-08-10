@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <servlet>
+        <servlet-name>Hello</servlet-name>
+        <servlet-class>servlets\HelloAction</servlet-class>
+        <url-pattern>/hello.na</url-pattern>
+    </servlet>
+    <servlet>
+        <servlet-name>Connection</servlet-name>
+        <servlet-class>servlets\ConnectionAction</servlet-class>
+        <url-pattern>/connection.na</url-pattern>
+    </servlet>
+    <servlet>
+        <servlet-name>demo_auth</servlet-name>
+        <php-file>demo/auth1.php</php-file>
+        <url-pattern>/demo_auth.na</url-pattern>
+    </servlet>
+    <servlet>
+        <servlet-name>demo_auth2</servlet-name>
+        <servlet-class>servlets\AuthAction</servlet-class>
+        <url-pattern>/demo_auth2.na</url-pattern>
+    </servlet>
+</web-app>

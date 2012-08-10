@@ -17,7 +17,7 @@ function getResponse()
 }
 
 // AUTH
-include NAPF_CLASSES_PATH . "napf/auth/LoginContext.php";
+include NAPF_CORE_PATH . "auth/LoginContext.php";
 /**
  * @param string $name
  * @return \napf\auth\LoginContext
@@ -92,4 +92,13 @@ function getProperty($name)
 {
     $prop = \napf\core\Properties::getInstance();
     return $prop->$name;
+}
+/**
+ *
+ * @param string $code
+ * @param string $locale
+ * @return string 
+ */
+function i18n($code, $locale = null){
+    return napf\common\I18n::getInstance()->get($code, $locale);
 }

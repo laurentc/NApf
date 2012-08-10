@@ -64,22 +64,6 @@ class ServletResponse
         $this->addHeader($name, $value);
     }
 
-    public function containsHeader($name)
-    {
-    }
-
-    public function encodeRedirectURL($url)
-    {
-    }
-
-    public function encodeURL($url)
-    {
-    }
-
-    public function sendError($sc, $msg = null)
-    {
-    }
-
     /**
      * @param $location
      * @param bool $transform : $location est un pattern Napf ?
@@ -89,21 +73,5 @@ class ServletResponse
     {
         $location = \napf\helpers\Url::get($location);
         header("Location: " . $location);
-    }
-
-    public function setDateHeader($name, $date)
-    {
-    }
-
-    public function setHeader($name, $value)
-    {
-    }
-
-    public function setIntHeader($name, $value)
-    {
-    }
-
-    public function setStatus($sc)
-    {
     }
 }

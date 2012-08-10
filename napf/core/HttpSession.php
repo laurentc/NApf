@@ -51,12 +51,4 @@ class HttpSession
         return self::getSessionID();
     }
 
-    /**
-     * Context en cours
-     * @return \napf\core\ServletContext
-     */
-    public static function getServletContext()
-    {
-        return self::getAttribute('ServletContext');
-    }
 }

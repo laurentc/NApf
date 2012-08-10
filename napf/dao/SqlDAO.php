@@ -30,7 +30,6 @@ class SqlDAO extends AbstractDAO
         $this->_table = $tablename;
         $this->_connection = $connection;
         $this->_introspection();
-        $this->_makeBean();
     }
 
     protected function _introspection()
@@ -143,13 +142,13 @@ class SqlDAO extends AbstractDAO
         return $this->_connection->doQuery($query, $bind);
     }
 
-    private function _makeBean()
+    private function makeBean($applicationName)
     {
         $name = ucfirst($this->_table);
-        if (!is_file(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php")) {
+        if (!is_file(NAPF_APPLICATIONS_PATH . $applicationName . "/beans/" . $name . "Bean.php")) {
             $class = get_class($this);
-            include NAPF_CLASSES_PATH . "napf/common/BeanModel.php";
-            file_put_contents(NAPF_CLASSES_PATH . "beans/" . $name . "Bean.php", $output);
+            include NAPF_CORE_PATH . "common/BeanModel.php";
+            file_put_contents(NAPF_APPLICATIONS_PATH . $applicationName . "/beans/" . $name . "Bean.php", $output);
         }
     }
 }

@@ -1,14 +1,12 @@
 <?php
 define('NAPF_ROOT_PATH', dirname(realpath(__FILE__)) . '/');
-define('NAPF_CLASSES_PATH', NAPF_ROOT_PATH . 'classes/');
-define('NAPF_CACHE_PATH', NAPF_ROOT_PATH . 'caches/');
-define('NAPF_MAPPINGS_PATH', NAPF_ROOT_PATH . 'configurations/mappings/');
-define('NAPF_PROPERTIES_PATH', NAPF_ROOT_PATH . 'configurations/properties/');
-define('NAPF_TRADUCTIONS_PATH', NAPF_ROOT_PATH . 'configurations/traductions/');
-define('NAPF_WWW_PATH', NAPF_ROOT_PATH . 'www/');
-define('NAPF_3PARTS_PATH', NAPF_ROOT_PATH . 'thirdparts/');
-include 'classes/autoload.php';
-include 'classes/shortcuts.php';
+define('NAPF_CORE_PATH', NAPF_ROOT_PATH . 'napf/');
+define('NAPF_APPLICATIONS_PATH', NAPF_ROOT_PATH . 'applications/');
+define('NAPF_DEFAULT_APPLICATION', 'default');
+
+include NAPF_CORE_PATH . 'autoload.php';
+include NAPF_CORE_PATH . 'shortcuts.php';
+
 define('NAPF_ENVIRONMENT', \napf\core\Controller::ENVIRONMENT_DEVELOPMENT); // utilisé par les sections ini
 
-\napf\core\Controller::getInstance()->process();
+\napf\core\Core::getInstance()->getController()->process();

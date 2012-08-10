@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : properties.xml
+    Created on : 9 août 2012, 10:09
+    Author     : laurentc
+    Description:
+        Purpose of the document follows.
+-->
+
+<properties>
+    <environement id="development">
+        <connection id="default">
+            <driver>mysql</driver>
+            <server>127.0.0.1</server>
+            <port>3306</port>
+            <user>root</user>
+            <password>root</password>
+        </connection>
+    </environement>
+</properties>
+
+<!--
+[development]
+connection.default.mysql.connexionString=127.0.0.1/test
+connection.default.mysql.user=root
+connection.default.mysql.password=root
+
+[production]
+connection.default.mysql.connexionString=aadlyl01-vm:3306/test
+connection.default.mysql.user=root
+connection.default.mysql.password=root
+-->

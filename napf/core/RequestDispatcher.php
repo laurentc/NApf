@@ -5,13 +5,14 @@ class RequestDispatcher
 {
     private $_path;
     private $_layout = null;
+    private $_application = null;
     public $request;
     public $response;
 
     /**
      * @param  string $path
      */
-    public function __construct($path)
+    public function __construct($path, $application = null)
     {
         if (strstr($path, "@")) {
             $tmp = explode("@", $path);
@@ -20,6 +21,10 @@ class RequestDispatcher
         } else {
             $this->_path = $path;
         }
+        if($application === null){
+            $application = Controller::getInstance()->getCurrentApplication()->getName();
+        }
+        $this->_application = $application;
     }
 
     public function forward(ServletRequest &$request, ServletResponse &$response)
@@ -28,7 +33,7 @@ class RequestDispatcher
         $this->response = $response;
         $output = "";
         $tmp = explode(".", $this->_path);
-        $file = NAPF_WWW_PATH . $this->_path;
+        $file = NAPF_APPLICATIONS_PATH . $this->_application . "/www/" . $this->_path;
         if (!is_file($file)) {
             throw new RequestDispatcherException("Fichier `$file` introuvable");
         }

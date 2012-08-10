@@ -57,14 +57,8 @@ class ServletRequest
         }
         return null;
     }
-
-    public function getAuthType()
-    {
-
-    }
-
-    public function getContextPath()
-    {
+    
+    public function getContextPath(){
         return $this->_contextPath;
     }
 
@@ -76,47 +70,12 @@ class ServletRequest
         return $_COOKIE;
     }
 
-    public function getDateHeader()
-    {
-
-    }
-
-    public function getHeader()
-    {
-
-    }
-
-    public function getHeaderNames()
-    {
-
-    }
-
-    public function getHeaders()
-    {
-
-    }
-
-    public function getIntHeader()
-    {
-
-    }
-
     /**
      * @return string
      */
     public function getMethod()
     {
         return $_SERVER["REQUEST_METHOD"];
-    }
-
-    public function getPathInfo()
-    {
-
-    }
-
-    public function getPathTranslated()
-    {
-
     }
 
     /**
@@ -147,11 +106,6 @@ class ServletRequest
         return $this->_parameters;
     }
 
-    public function getRemoteUser()
-    {
-
-    }
-
     /**
      * Returns a RequestDispatcher object that acts as a wrapper for the resource located at the given path.
      *
@@ -162,11 +116,6 @@ class ServletRequest
     {
         $requestDispatcher = new RequestDispatcher($path);
         return $requestDispatcher;
-    }
-
-    public function getRequestedSessionId()
-    {
-
     }
 
     public function getRequestURI()
@@ -204,36 +153,11 @@ class ServletRequest
         return $_SESSION;
     }
 
-    public function getUserPrincipal()
-    {
-
-    }
-
-    public function isRequestedSessionIdFromCookie()
-    {
-
-    }
-
-    public function isRequestedSessionIdFromURL()
-    {
-
-    }
-
-    public function isRequestedSessionIdValid()
-    {
-
-    }
-
     public function isSecure()
     {
         if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
             return true;
         }
-    }
-
-    public function isUserInRole($role)
-    {
-
     }
 
     /**

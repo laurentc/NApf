@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<traductions>
+    <traduction code="napf_say_hello">
+        <lang locale="fr-fr">napf vous dit bonjour</lang>
+        <lang locale="en">napf say you hello</lang>
+    </traduction>
+    <traduction code="goobye">
+        <lang locale="fr-fr">enrevoir</lang>
+        <lang locale="en">good bye</lang>
+    </traduction>
+</traductions>
