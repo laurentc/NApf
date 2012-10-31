@@ -37,23 +37,10 @@ class RequestDispatcher
         if (!is_file($file)) {
             throw new RequestDispatcherException("Fichier `$file` introuvable");
         }
-        if ($tmp[count($tmp) - 1] == "tpl") {
-            include NAPF_3PARTS_PATH . "smarty/Smarty.class.php";
-            $smarty = new \Smarty();
-            $smarty->template_dir = NAPF_3PARTS_PATH . "smarty/templates";
-            $smarty->compile_dir = NAPF_3PARTS_PATH . "smarty/compile";
-            $smarty->config_dir = NAPF_3PARTS_PATH . "smarty/config";
-            $smarty->cache_dir = NAPF_3PARTS_PATH . "smarty/cache";
-            $smarty->assign("request", $request);
-            $smarty->assign("response", $response);
-
-            $output = $smarty->fetch($file);
-        } else {
-            ob_start();
-            include $file;
-            $output = ob_get_contents();
-            ob_end_clean();
-        }
+        ob_start();
+        include $file;
+        $output = ob_get_contents();
+        ob_end_clean();
         if ($this->_layout === null) {
             echo $output;
         } else {
