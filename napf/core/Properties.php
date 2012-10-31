@@ -27,15 +27,13 @@ class Properties
     
     public function loadIni($file, $applicationName)
     {
-        if (!is_file($file)) {
-            throw new \Exception("Fichier " . $file . " introuvable");
+        if (is_file($file)) {
+            $content = parse_ini_file($file, true);
+            // on récupère les propriétés de l'environnement désiré
+            $envprops = $content[NAPF_ENVIRONMENT];
+            $object = $this->_convert($envprops);
+            $this->_properties[$applicationName] = $object;
         }
-        $content = parse_ini_file($file, true);
-        // on récupère les propriétés de l'environnement désiré
-        $envprops = $content[NAPF_ENVIRONMENT];
-        $object = $this->_convert($envprops);
-        $this->_properties[$applicationName] = $object;
-        var_dump($this->_properties);
     }
 
     private function _convert($array)

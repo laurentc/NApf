@@ -40,9 +40,9 @@ class ServletRequest
      */
     private $_servletPath;
 
-    public function __construct()
+    public function __construct(array $initParams = array())
     {
-        $this->_parameters = array_merge($_GET, $_POST);
+        $this->_parameters = array_merge($_GET, $_POST, $initParams);
         $this->_splitPath();
     }
 
@@ -110,7 +110,7 @@ class ServletRequest
      * Returns a RequestDispatcher object that acts as a wrapper for the resource located at the given path.
      *
      * @param String $path
-     * @return RequestDispatcher
+     * @return \napf\core\RequestDispatcher
      */
     public function getRequestDispatcher($path)
     {

@@ -3,6 +3,7 @@ define('NAPF_ROOT_PATH', dirname(realpath(__FILE__)) . '/');
 define('NAPF_CORE_PATH', NAPF_ROOT_PATH . 'napf/');
 define('NAPF_APPLICATIONS_PATH', NAPF_ROOT_PATH . 'applications/');
 define('NAPF_DEFAULT_APPLICATION', 'default');
+define('NAPF_LOGS_PATH', NAPF_ROOT_PATH . 'logs/');
 
 include NAPF_CORE_PATH . 'autoload.php';
 include NAPF_CORE_PATH . 'shortcuts.php';

@@ -21,7 +21,7 @@ class RequestDispatcher
         } else {
             $this->_path = $path;
         }
-        if($application === null){
+        if($application === null && Controller::getInstance()->getCurrentApplication() !== null){
             $application = Controller::getInstance()->getCurrentApplication()->getName();
         }
         $this->_application = $application;
@@ -32,10 +32,10 @@ class RequestDispatcher
         $this->request = $request;
         $this->response = $response;
         $output = "";
-        $tmp = explode(".", $this->_path);
+        $file = null;
         $file = NAPF_APPLICATIONS_PATH . $this->_application . "/www/" . $this->_path;
         if (!is_file($file)) {
-            throw new RequestDispatcherException("Fichier `$file` introuvable");
+            $file = NAPF_ROOT_PATH . 'www/404.php';
         }
         ob_start();
         include $file;
@@ -44,12 +44,12 @@ class RequestDispatcher
         if ($this->_layout === null) {
             echo $output;
         } else {
-            $layout = NAPF_WWW_PATH . $this->_layout;
+            $layout = NAPF_APPLICATIONS_PATH . $this->_application . "/www/" . $this->_layout;
             if (!is_file($layout)) {
                 throw new RequestDispatcherException("Fichier `$layout` introuvable");
             }
             $CONTENT = $output;
-            include NAPF_WWW_PATH . $this->_layout;
+            include $layout;
         }
     }
 

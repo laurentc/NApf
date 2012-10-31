@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <servlet>
+        <servlet-name>AppList</servlet-name>
+        <servlet-class>servlets\application\ListAction</servlet-class>
+        <url-pattern>/application/liste.na</url-pattern>
+    </servlet>
+    <servlet>
+        <servlet-name>AppAdd</servlet-name>
+        <servlet-class>servlets\application\AddAction</servlet-class>
+        <url-pattern>/application/ajout.na</url-pattern>
+    </servlet>
+    <servlet>
+        <servlet-name>AppUpd</servlet-name>
+        <servlet-class>servlets\application\UpdAction</servlet-class>
+        <url-pattern>/application/modif.na</url-pattern>
+    </servlet>
+</web-app>

@@ -8,15 +8,15 @@ class Controller
     
     private static $_instance = null;
     /**
-     * @var ServletRequest
+     * @var \napf\core\ServletRequest
      */
     public $request = null;
     /**
-     * @var ServletResponse
+     * @var \napf\core\ServletResponse
      */
     public $response = null;
     /*
-     * @var Mapper
+     * @var \napf\core\Mapper
      */
     public $mapper = null;
 
@@ -45,7 +45,7 @@ class Controller
     }
     /**
      *
-     * @return Application 
+     * @return \napf\core\Application 
      */
     public function getCurrentApplication(){
         return $this->mapper->currentApplication;
@@ -54,11 +54,15 @@ class Controller
     {
         $info = null;
         if (isset($_REQUEST["napfmap"])) {
-            $info = $this->mapper->getMapInfo($_REQUEST["napfmap"]);
-            if(is_file(NAPF_APPLICATIONS_PATH . $this->getCurrentApplication()->getName() . "/bootstrap.php")){
-                include(NAPF_APPLICATIONS_PATH . $this->getCurrentApplication()->getName() . "/bootstrap.php");
+            try{
+                $info = $this->mapper->getMapInfo($_REQUEST["napfmap"]);
+            }catch(\Exception $e){
+                \napf\helpers\Logger::getInstance('napf_core')->log($e->getMessage() . ': ' . $_REQUEST["napfmap"]);
             }
             if ($info !== null) {
+                if(is_file(NAPF_APPLICATIONS_PATH . $this->getCurrentApplication()->getName() . "/bootstrap.php")){
+                    include(NAPF_APPLICATIONS_PATH . $this->getCurrentApplication()->getName() . "/bootstrap.php");
+                }
                 if($info['php-file'] !== null){
                     $class = "napf\servlets\ForwardAction";
                 } else {
@@ -76,6 +80,7 @@ class Controller
                 }
                 $classAction->doAfter($this->request, $this->response);
             } else {
+                $this->request = new ServletRequest();
                 $classAction = new \napf\servlets\NotFoundAction();
                 $classAction->doGet(new ServletRequest(), $this->response);
             }

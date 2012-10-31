@@ -49,4 +49,15 @@ class Application {
         return NAPF_APPLICATIONS_PATH . $this->_name . "/";
     }
     
+    public static function getList(){
+        $files = scandir(NAPF_APPLICATIONS_PATH);
+        $list = array();
+        foreach($files as $file){
+            if(is_dir(NAPF_APPLICATIONS_PATH . $file) && preg_match('/^\.(.*)/', $file) === 0){
+                $list[] = $file;
+            }
+        }
+        return $list;
+    }
+    
 }

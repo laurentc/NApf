@@ -16,7 +16,7 @@ header("Status: " . \napf\core\ServletResponse::SC_NOT_FOUND);
 
             <h3>Page Introuvable</h3>
         </td>
-        <td><input type="image" src="napf.jpg"></td>
+        <td><input type="image" src="<?php url_echo('napf.jpg');?>" alt="NApf"></td>
     </tr>
 </table>
 

@@ -1,7 +1,7 @@
 <?php
 // MVC
 /**
- * @return \napf\core\NapfServletRequest
+ * @return \napf\core\ServletRequest
  */
 function getRequest()
 {
@@ -9,7 +9,7 @@ function getRequest()
 }
 
 /**
- * @return \napf\core\NapfServletResponse
+ * @return \napf\core\ServletResponse
  */
 function getResponse()
 {
@@ -86,6 +86,15 @@ function getIniFile($path)
 function url_echo($path, $params = array())
 {
     echo \napf\helpers\Url::get($path, $params);
+}
+/**
+ * @param $path
+ * @param array $params
+ * @return String
+ */
+function url($path, $params = array())
+{
+    return \napf\helpers\Url::get($path, $params);
 }
 
 function getProperty($name)
